@@ -1,4 +1,4 @@
-import ipaddress
+# import ipaddress
 import sunspec2.modbus.client as client
 
 # Creating the connection.
@@ -10,5 +10,14 @@ d = client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.0.64", ipport=5020)
 d.scan()
 
 # One of the values I can extract is the reported tcp ip address value.
-ip = d.model_64110[0].TCPIP_address.value
-print("ip address read from the AXS port:", ipaddress.ip_address(ip))
+# ip = d.model_64110[0].TCPIP_address.value
+# print("ip address read from the AXS port:", ipaddress.ip_address(ip))
+
+if "model_64110" in d.models:
+  print("model_64110", d.model_64110[0])
+
+if "model_64115" in d.models:
+  print("model_64115", d.model_64115[0])
+else:
+  print("sadly, did not find 64115")
+  print("found models:", d.models.keys())
