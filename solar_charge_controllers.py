@@ -88,4 +88,4 @@ while True:
     save_point("Solar Charger #6f", mb_power_out_6)
     total_solar_output = mb_power_out_1 + mb_power_out_2 + mb_power_out_3 + mb_power_out_4 + mb_power_out_5 + mb_power_out_6
     save_point("Solar Charger Total", total_solar_output)
-    time.sleep(1)
+    time.sleep(30)

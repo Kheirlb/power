@@ -37,4 +37,4 @@ while True:
     except Exception as e:
         d = mate3s_client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.1.100", ipport=1025)
         print(e)
-    time.sleep(1)
+    time.sleep(30)
