@@ -3,6 +3,7 @@ import time
 import influxdb_client, os, time
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
+import config
 
 # Setup connection to mate3s
 d = mate3s_client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.1.100", ipport=1025)
@@ -11,7 +12,7 @@ d = mate3s_client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.1.100", ipport=10
 # Setup connection to database
 token = os.environ.get("INFLUXDB_TOKEN")
 org = "Parks Ranch"
-url = "http://192.168.1.108:8086"
+url = f"http://{config.hostname}:8086"
 write_client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
 bucket="power"
 write_api = write_client.write_api(write_options=SYNCHRONOUS)
@@ -37,4 +38,4 @@ while True:
     except Exception as e:
         d = mate3s_client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.1.100", ipport=1025)
         print(e)
-    time.sleep(30)
+    time.sleep(config.delay_s)

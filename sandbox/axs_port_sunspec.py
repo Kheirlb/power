@@ -4,7 +4,7 @@ import sunspec2.modbus.client as client
 # Creating the connection.
 # A static ip address is set for the AXS unit at 192.168.0.64 using the config file on the SD card.
 # Using port 5020 instead of 502 to avoid firewall issues.
-d = client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.0.64", ipport=5020)
+d = client.SunSpecModbusClientDeviceTCP(ipaddr="192.168.1.100", ipport=1025)
 
 # Scan for the available models. In my test case, there will only be the 64110 OutBack block since nothing else is connected to the AXS Port.
 d.scan()
@@ -21,3 +21,6 @@ if "model_64115" in d.models:
 else:
   print("sadly, did not find 64115")
   print("found models:", d.models.keys())
+
+if "inverter" in d.models:
+  print(d.inverter[0])
