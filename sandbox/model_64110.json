@@ -377,7 +377,8 @@
                 "mandatory": "M",
                 "name": "OutBack_AGS_DC_Gen_Absorb_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_AGS_DC_Gen_Absorb_Time",
@@ -385,7 +386,8 @@
                 "mandatory": "M",
                 "name": "OutBack_AGS_DC_Gen_Absorb_Time",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Hour_SF"
             },
             {
                 "label": "OutBack_AGS_Fault_Time",
@@ -481,7 +483,8 @@
                 "mandatory": "M",
                 "name": "OutBack_AGS_2_Min_Start_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_AGS_2_Hour_Start_Mode",
@@ -497,7 +500,8 @@
                 "mandatory": "M",
                 "name": "OutBack_AGS_2_Hour_Start_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_AGS_24_Hour_Start_Mode",
@@ -513,7 +517,8 @@
                 "mandatory": "M",
                 "name": "OutBack_AGS_24_Hour_Start_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_AGS_Load_Start_Mode",
@@ -761,7 +766,8 @@
                 "mandatory": "M",
                 "name": "OutBack_HBX_Grid_Connect_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_HBX_Grid_Connect_Delay",
@@ -769,7 +775,8 @@
                 "mandatory": "M",
                 "name": "OutBack_HBX_Grid_Connect_Delay",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Hour_SF"
             },
             {
                 "label": "OutBack_HBX_Grid_Disconnect_Voltage",
@@ -777,7 +784,8 @@
                 "mandatory": "M",
                 "name": "OutBack_HBX_Grid_Disconnect_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_HBX_Grid_Disconnect_Delay",
@@ -785,7 +793,8 @@
                 "mandatory": "M",
                 "name": "OutBack_HBX_Grid_Disconnect_Delay",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Hour_SF"
             },
             {
                 "label": "OutBack_HBX_Grid_Connect_SOC",
@@ -969,7 +978,8 @@
                 "mandatory": "M",
                 "name": "OutBack_Load_Grid_Transfer_Threshold",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_Load_Grid_Transfer_Connect_Delay",
@@ -993,7 +1003,8 @@
                 "mandatory": "M",
                 "name": "OutBack_Load_Grid_Transfer_Connect_Battery_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_Load_Grid_Transfer_Re_Connect_Battery_Voltage",
@@ -1001,7 +1012,8 @@
                 "mandatory": "M",
                 "name": "OutBack_Load_Grid_Transfer_Re_Connect_Battery_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_Global_Charger_Control_Mode",
@@ -1209,7 +1221,8 @@
                 "mandatory": "M",
                 "name": "OutBack_Measured_System_Voltage",
                 "size": 1,
-                "type": "uint16"
+                "type": "uint16",
+                "sf": "OutBack_Voltage_SF"
             },
             {
                 "label": "OutBack_AGS_AC_Reconnect_Delay",

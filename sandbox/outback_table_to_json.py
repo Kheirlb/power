@@ -69,6 +69,7 @@ for index, row in df.iterrows():
     }
     if isinstance(sf, str):
         track_sf.add(sf)
+        point["sf"] = sf
         # print(sf) 
         
     points.append(point)
