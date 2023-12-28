@@ -20,7 +20,19 @@ if "model_64115" in d.models:
   print("model_64115", d.model_64115[0])
 else:
   print("sadly, did not find 64115")
-  print("found models:", d.models.keys())
 
 if "inverter" in d.models:
   print(d.inverter[0])
+  
+inverter_1 = d.model_64115[0]
+inverter_2 = d.model_64115[1]
+inverter_3 = d.model_64115[2]
+print(f"Inverter 1: \t{inverter_1.GS_Split_Load_kW.value} kW")
+print(f"Inverter 2: \t{inverter_2.GS_Split_Load_kW.value} kW")
+print(f"Inverter 3: \t{inverter_3.GS_Split_Load_kW.value} kW")
+print(f"Inverter 1: \t{inverter_1.GS_Split_Load_kW.cvalue} kW")
+print(f"Inverter 2: \t{inverter_2.GS_Split_Load_kW.cvalue} kW")
+print(f"Inverter 3: \t{inverter_3.GS_Split_Load_kW.cvalue} kW")
+
+
+print(f"Inverters: \t{d.inverter[0].W.value} W")

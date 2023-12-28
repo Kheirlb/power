@@ -1,17 +1,5 @@
 from pymodbus.client import ModbusTcpClient
-import time
-import influxdb_client, os, time
-from influxdb_client import InfluxDBClient, Point, WritePrecision
-from influxdb_client.client.write_api import SYNCHRONOUS
-import config
-
-# Setup connection to database
-token = os.environ.get("INFLUXDB_TOKEN")
-org = "Parks Ranch"
-url = f"http://{config.hostname}:8086"
-client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
-bucket="power"
-write_api = client.write_api(write_options=SYNCHRONOUS)
+from influxdb_client import Point
 
 # Helper function to read float values from solar charge controller.
 def scale_f16(passed_val):
@@ -58,39 +46,39 @@ class SolarCharger:
     def power_out(self):
         response = self.client.read_holding_registers(58, 1, 1)
         # TODO(kparks): Handle error better.
-        return float(scale_f16(response.registers[0]))
+        return float(scale_f16(response.registers[0])) / 1000.0
 
-sc1 = SolarCharger("192.168.1.101")
-sc2 = SolarCharger("192.168.1.102")
-sc3 = SolarCharger("192.168.1.103")
-sc4 = SolarCharger("192.168.1.104")
-sc5 = SolarCharger("192.168.1.105")
-sc6 = SolarCharger("192.168.1.106")
+def connect():
+    sc1 = SolarCharger("192.168.1.101")
+    sc2 = SolarCharger("192.168.1.102")
+    sc3 = SolarCharger("192.168.1.103")
+    sc4 = SolarCharger("192.168.1.104")
+    sc5 = SolarCharger("192.168.1.105")
+    sc6 = SolarCharger("192.168.1.106")
+    return (sc1, sc2, sc3, sc4, sc5, sc6)
 
-def save_point(name, solar_output):
-    print(f"{name} - Solar Output: {solar_output:0.1f} W")
-    point = (
+def get_point(name, solar_output):
+    print(f"{name}: \t{solar_output:0.1f} kW")
+    return (
         Point(name)
-        .field("Solar Output", solar_output)
+        .field("power_kw", solar_output)
     )
-    write_api.write(bucket=bucket, org="Parks Ranch", record=point)
 
-while True:
-    try:
-        mb_power_out_1 = sc1.power_out()
-        mb_power_out_2 = sc2.power_out()
-        mb_power_out_3 = sc3.power_out()
-        mb_power_out_4 = sc4.power_out()
-        mb_power_out_5 = sc5.power_out()
-        mb_power_out_6 = sc6.power_out()
-        save_point("Solar Charger #1", mb_power_out_1)
-        save_point("Solar Charger #2", mb_power_out_2)
-        save_point("Solar Charger #3f", mb_power_out_3)
-        save_point("Solar Charger #4f", mb_power_out_4)
-        save_point("Solar Charger #5", mb_power_out_5)
-        save_point("Solar Charger #6f", mb_power_out_6)
-        total_solar_output = mb_power_out_1 + mb_power_out_2 + mb_power_out_3 + mb_power_out_4 + mb_power_out_5 + mb_power_out_6
-        save_point("Solar Charger Total", total_solar_output)
-    except Exception as e:
-        print(e)
-    time.sleep(config.delay_s)
+def get_points(sc1, sc2, sc3, sc4, sc5, sc6):
+    mb_power_out_1 = sc1.power_out()
+    mb_power_out_2 = sc2.power_out()
+    mb_power_out_3 = sc3.power_out()
+    mb_power_out_4 = sc4.power_out()
+    mb_power_out_5 = sc5.power_out()
+    mb_power_out_6 = sc6.power_out()
+    point1 = get_point("solar_charger_1", mb_power_out_1)
+    point2 = get_point("solar_charger_2", mb_power_out_2)
+    point3 = get_point("solar_charger_3", mb_power_out_3)
+    point4 = get_point("solar_charger_4", mb_power_out_4)
+    point5 = get_point("solar_charger_5", mb_power_out_5)
+    point6 = get_point("solar_charger_6", mb_power_out_6)
+    total_solar_output = mb_power_out_1 + mb_power_out_2 + mb_power_out_3 + mb_power_out_4 + mb_power_out_5 + mb_power_out_6
+    if total_solar_output < 10.0:
+        total_solar_output = 0.0
+    point_total = get_point("solar_charger_total", total_solar_output)
+    return [point1, point2, point3, point4, point5, point5, point6, point_total]
