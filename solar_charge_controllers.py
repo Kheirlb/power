@@ -78,7 +78,9 @@ def get_points(sc1, sc2, sc3, sc4, sc5, sc6):
     point5 = get_point("solar_charger_5", mb_power_out_5)
     point6 = get_point("solar_charger_6", mb_power_out_6)
     total_solar_output = mb_power_out_1 + mb_power_out_2 + mb_power_out_3 + mb_power_out_4 + mb_power_out_5 + mb_power_out_6
-    if total_solar_output < 10.0:
+    # Sometimes the solar charge controllers read a tiny bit of power even in the middle of the night.
+    # If they total less than 10 watts, we set the total to 0.0 so it is not as distracting.
+    if total_solar_output < 0.010:
         total_solar_output = 0.0
     point_total = get_point("solar_charger_total", total_solar_output)
     return [point1, point2, point3, point4, point5, point5, point6, point_total]
