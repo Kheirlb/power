@@ -1,0 +1,11 @@
+[Unit]
+Description=Power room service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/usr/bin/python3 /home/pi/GitHub/power/service.py
+User=pi
+Environment="INFLUXDB_TOKEN=hqKKh4OnyXROKtqEQW05NB07I3jVFwyH569xiE9P6bOB0cttFmUEMI5D0pzL6ThTUsu3fMYriz49dXYOdQjxfQ=="
+[Install]
+WantedBy=multi-user.target
