@@ -1,0 +1,4 @@
+influxdb-client
+pymodbus
+pandas
+# sunspec2 # using custom build
