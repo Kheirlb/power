@@ -1,0 +1,16 @@
+FROM arm64v8/python:3.11-slim
+
+COPY requirements.txt .
+RUN python3 -m pip install -r requirements.txt
+
+RUN git clone --recurse-submodules https://github.com/Kheirlb/pysunspec2-fork.git
+# RUN git clone https://github.com/Kheirlb/models-fork.git models
+RUN python3 -m pip install -e pysunspec2-fork/
+
+WORKDIR app
+
+COPY mate3s_sunspec.py ./
+COPY solar_charge_controllers.py ./
+COPY service.py ./
+
+ENTRYPOINT ["python3", "/app/service.py"]
