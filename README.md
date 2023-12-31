@@ -73,7 +73,7 @@ Grafana is a popular open-source "Graphical Dashboard" tool that easily connects
 
 Install grafana to the raspberry pi following the instructions here. TODO: Copy the instructions here. Go to the webpage and create a login with username "admin" and your desired password. Connect grafana to influx as a data source. You will need to copy that token here.
 
-Create a new dashboard and import the .json file from this script. This will automatically configure your dashboard. You won't have any data tough until we do the following steps.
+Create a new dashboard and import the .json file from this repo. This will automatically configure your dashboard. You won't have any data tough until we do the following steps.
 
 ### Clone power
 Clone our git repo "power" into a GitHub folder in ~/. This repo (where you are reading this README) has our custom python scripts.
