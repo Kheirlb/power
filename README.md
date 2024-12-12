@@ -2,7 +2,7 @@
 Smart off-grid power control.
 
 # Hardware ChangeLog
-- Thanksgiving 2024 - Installed new router and batterPi. BatterPi documention in subfolder.
+- Thanksgiving 2024 - Installed new router and batteryPi. Some documentation is available in the batteryPi/ subfolder.
 
 # System Overview
 Disclaimer: This repo has a lot of specific content for our custom home project, and would need to be adapted heavily for others to use. Maybe someday I will make it auto-configure, but until that day, good luck making it work for you.
