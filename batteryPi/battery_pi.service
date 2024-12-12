@@ -1,0 +1,11 @@
+[Unit]
+Description=Battery pi service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/home/pi/batteryPi/battery_pi.sh
+WorkingDirectory=/home/pi/batteryPi
+User=pi
+[Install]
+WantedBy=multi-user.target

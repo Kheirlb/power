@@ -1,6 +1,9 @@
 # power
 Smart off-grid power control.
 
+# Hardware ChangeLog
+- Thanksgiving 2024 - Installed new router and batteryPi. Some documentation is available in the batteryPi/ subfolder.
+
 # System Overview
 Disclaimer: This repo has a lot of specific content for our custom home project, and would need to be adapted heavily for others to use. Maybe someday I will make it auto-configure, but until that day, good luck making it work for you.
 
@@ -119,7 +122,7 @@ There is also a `config.py` script that specifes IP address of the raspberry pi 
 ### Start the Power Service
 Copy the service file to systemd's desired location. You will need root access. Then start the service.
 ```
-sudo cp power.service /etc/systemd/service/
+sudo cp power.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl start power.service
 ```
