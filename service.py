@@ -21,21 +21,17 @@ result = client.connect(MQTT_BROKER, MQTT_PORT, 60)
 print("MQTT connect result: ", result)
 
 while True:
-    print(datetime.datetime.now())
+    print("Getting data from inverters...", datetime.datetime.now())
 
-    try:
-        # Get data from inverters.
-        messages = mate3s_sunspec.get_mqtt_data(inverters)
+    # Get data from inverters.
+    messages = mate3s_sunspec.get_mqtt_data(inverters)
 
-        # Publish data to MQTT.
-        client.publish(MQTT_TOTALS_TOPIC, json.dumps(messages[0]))
-        client.publish(MQTT_INVERTER1_TOPIC, json.dumps(messages[1]))
-        client.publish(MQTT_INVERTER2_TOPIC, json.dumps(messages[2]))
-        client.publish(MQTT_INVERTER3_TOPIC, json.dumps(messages[3]))
-
-    except Exception as e:
-        print(e)
-        # TODO(kparks) Restart all connections?
+    # Publish data to MQTT.
+    client.publish(MQTT_TOTALS_TOPIC, json.dumps(messages[0]))
+    client.publish(MQTT_INVERTER1_TOPIC, json.dumps(messages[1]))
+    client.publish(MQTT_INVERTER2_TOPIC, json.dumps(messages[2]))
+    client.publish(MQTT_INVERTER3_TOPIC, json.dumps(messages[3]))
+    print("Published data to MQTT.")
 
     # Do a sleep loop.
     time.sleep(config.delay_s)
