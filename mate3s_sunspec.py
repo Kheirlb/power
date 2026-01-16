@@ -48,9 +48,9 @@ def get_mqtt_data(d):
     inverter1 = d.model_64115[0]
     inverter2 = d.model_64115[1]
     inverter3 = d.model_64115[2]
-    inverter1_message = inverter_64115(inverter1)
-    inverter2_message = inverter_64115(inverter2)
-    inverter3_message = inverter_64115(inverter3)
+    inverter1_message = inverter_64115(inverter1, ts_ms)
+    inverter2_message = inverter_64115(inverter2, ts_ms)
+    inverter3_message = inverter_64115(inverter3, ts_ms)
     total_output_current = add_current_values(inverter1, inverter2, inverter3, "GS_Split_L1_Inverter_Output_Current", "GS_Split_L2_Inverter_Output_Current")
     total_charge_current = add_current_values(inverter1, inverter2, inverter3, "GS_Split_L1_Inverter_Charge_Current", "GS_Split_L2_Inverter_Charge_Current")
     total_output_power = add_values(inverter1, inverter2, inverter3, "GS_Split_Output_kW")
