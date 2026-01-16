@@ -18,10 +18,10 @@ MQTT_TOTALS_TOPIC =    "ranch/power/inverter/totals/telemetry"
 MQTT_PORT = 1883
 client = mqtt.Client()
 result = client.connect(MQTT_BROKER, MQTT_PORT, 60)
-print("MQTT connect result: ", result)
+print("MQTT connect result: ", result, flush=True)
 
 while True:
-    print("Getting data from inverters...", datetime.datetime.now())
+    print("Getting data from inverters...", datetime.datetime.now(), flush=True)
 
     # Get data from inverters.
     messages = mate3s_sunspec.get_mqtt_data(inverters)
@@ -31,7 +31,7 @@ while True:
     client.publish(MQTT_INVERTER1_TOPIC, json.dumps(messages[1]))
     client.publish(MQTT_INVERTER2_TOPIC, json.dumps(messages[2]))
     client.publish(MQTT_INVERTER3_TOPIC, json.dumps(messages[3]))
-    print("Published data to MQTT.")
+    print("Published data to MQTT.", flush=True)
 
     # Do a sleep loop.
     time.sleep(config.delay_s)

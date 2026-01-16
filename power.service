@@ -5,7 +5,9 @@ After=multi-user.target
 Type=simple
 Restart=on-failure
 RestartSec=5
-ExecStart=/usr/bin/python3 /home/pi/GitHub/power/service.py
+StandardOutput=journal
+StandardError=journal
+ExecStart=/usr/bin/python3 -u /home/pi/GitHub/power/service.py
 User=pi
 [Install]
 WantedBy=multi-user.target
