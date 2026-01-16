@@ -17,7 +17,8 @@ MQTT_INVERTER3_TOPIC = "ranch/power/inverter/03/telemetry"
 MQTT_TOTALS_TOPIC =    "ranch/power/inverter/totals/telemetry"
 MQTT_PORT = 1883
 client = mqtt.Client()
-client.connect(MQTT_BROKER, MQTT_PORT, 60)
+result = client.connect(MQTT_BROKER, MQTT_PORT, 60)
+print("MQTT connect result: ", result)
 
 while True:
     print(datetime.datetime.now())
