@@ -6,6 +6,5 @@ Type=simple
 Restart=on-failure
 ExecStart=/usr/bin/python3 /home/pi/GitHub/power/service.py
 User=pi
-Environment="INFLUXDB_TOKEN=<COPY_YOUR_TOKEN_HERE>"
 [Install]
 WantedBy=multi-user.target

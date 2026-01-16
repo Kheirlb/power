@@ -1,4 +1,4 @@
-influxdb-client
 pymodbus
-pandas
+paho-mqtt
+# influxdb-client # no longer using
 # sunspec2 # using custom build

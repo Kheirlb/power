@@ -115,8 +115,6 @@ TODO: get sunspec to update main repo so we don't need to have the above part at
 ### Configure Power Service
 We will be using a linux systemd file to auto-start our python script on boot and on-failure.
 
-We need use that influx token we saved awhile back in the python script. The script `service.py` pulls that token from an environmental variable `INFLUXDB_TOKEN`. We can pass that environment variable using the `power.service` file. Add a new line `Environment="INFLUXDB_TOKEN=<TOKEN HERE>"` under `User=pi`, and change `<TOKEN_HERE>` to be your token.
-
 There is also a `config.py` script that specifes IP address of the raspberry pi and the sample rate to read data and write it to the database. It does not need to be changed if you are happy running all the scripts on the pi and are happy with the default interval.
 
 ### Start the Power Service
