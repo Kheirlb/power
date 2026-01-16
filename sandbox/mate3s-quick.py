@@ -16,4 +16,4 @@ print(f"Connecting to Mate3S '{ipaddr}:{tcpport}', inverter '{inverterport}', po
 d = mate3s_client.SunSpecModbusClientDeviceTCP(ipaddr=ipaddr, ipport=tcpport)
 d.scan()
 block = d.model_64115[inverterport]
-print(block[pointName].cvalue)
+print(block.points[pointName].cvalue)
