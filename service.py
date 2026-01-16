@@ -6,7 +6,7 @@ import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
 import config
 import mate3s_sunspec
-import solar_charge_controllers
+# import solar_charge_controllers
 
 # Setup database client.
 # Token is set in ~/.bashrc file on raspberry pi. 
@@ -21,7 +21,7 @@ write_api = write_client.write_api(write_options=SYNCHRONOUS)
 inverters = mate3s_sunspec.connect()
 
 # Setup solar charge controller connection.
-controllers = solar_charge_controllers.connect()
+# controllers = solar_charge_controllers.connect()
 
 while True:
     print(datetime.datetime.now())
@@ -32,7 +32,7 @@ while True:
         points.extend(mate3s_sunspec.get_points(inverters))
 
         # Get data from solar charge controllers.
-        points.extend(solar_charge_controllers.get_points(*controllers))
+        # points.extend(solar_charge_controllers.get_points(*controllers))
 
         # Write data to database.
         write_api.write(bucket=bucket, org=org, record=points)
