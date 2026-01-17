@@ -6,7 +6,16 @@ Wants=network-online.target
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=%h/.Xauthority
-ExecStart=/usr/bin/chromium-browser --kiosk --incognito --noerrdialogs --disable-infobars --check-for-update-interval=31536000 http://localhost:1880/dashboard/
+ExecStart=/usr/bin/chromium-browser \
+  --start-fullscreen \
+  --force-device-scale-factor=1.5 \
+  --incognito \
+  --noerrdialogs \
+  --disable-infobars \
+  --check-for-update-interval=31536000 \
+  --password-store=basic \
+  --use-mock-keychain \
+  http://localhost:1880/dashboard/
 Restart=on-failure
 RestartSec=2
 
