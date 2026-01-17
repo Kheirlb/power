@@ -4,8 +4,6 @@ After=graphical-session.target network-online.target
 Wants=network-online.target
 
 [Service]
-User=pi
-Group=pi
 Environment=HOME=/home/pi
 Environment=XDG_CONFIG_HOME=/home/pi/.config
 Environment=DISPLAY=:0
