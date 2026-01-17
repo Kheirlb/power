@@ -4,18 +4,24 @@ After=graphical-session.target network-online.target
 Wants=network-online.target
 
 [Service]
+User=pi
+Group=pi
+Environment=HOME=/home/pi
+Environment=XDG_CONFIG_HOME=/home/pi/.config
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=%h/.Xauthority
 ExecStart=/usr/bin/chromium-browser \
+  --user-data-dir=/home/pi/.config/chromium-kiosk \
   --start-fullscreen \
-  --force-device-scale-factor=1.5 \
-  --incognito \
+  # --force-device-scale-factor=2.0 \
+  # --incognito \
   --noerrdialogs \
   --disable-infobars \
-  --check-for-update-interval=31536000 \
+  --disable-session-crashed-bubble \
+  # --check-for-update-interval=31536000 \
   --password-store=basic \
-  --use-mock-keychain \
-  http://localhost:1880/dashboard/
+  # --use-mock-keychain \
+  http://power.local:1880/dashboard/
 Restart=on-failure
 RestartSec=2
 
