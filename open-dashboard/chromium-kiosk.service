@@ -13,14 +13,10 @@ Environment=XAUTHORITY=%h/.Xauthority
 ExecStart=/usr/bin/chromium-browser \
   --user-data-dir=/home/pi/.config/chromium-kiosk \
   --start-fullscreen \
-  # --force-device-scale-factor=2.0 \
-  # --incognito \
   --noerrdialogs \
   --disable-infobars \
   --disable-session-crashed-bubble \
-  # --check-for-update-interval=31536000 \
   --password-store=basic \
-  # --use-mock-keychain \
   http://power.local:1880/dashboard/
 Restart=on-failure
 RestartSec=2
