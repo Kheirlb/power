@@ -1,45 +1,37 @@
-"""Main power room service."""
+"""Main power room python service (mate3s to mqtt)."""
 import time
 import datetime
-import os
-import influxdb_client
-from influxdb_client.client.write_api import SYNCHRONOUS
 import config
 import mate3s_sunspec
-import solar_charge_controllers
-
-# Setup database client.
-# Token is set in ~/.bashrc file on raspberry pi. 
-token = os.environ.get("INFLUXDB_TOKEN")
-org = "Parks Ranch"
-url = f"http://{config.hostname}:8086"
-bucket="power"
-write_client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
-write_api = write_client.write_api(write_options=SYNCHRONOUS)
+import json
+import paho.mqtt.client as mqtt
 
 # Setup inverter connection.
 inverters = mate3s_sunspec.connect()
 
-# Setup solar charge controller connection.
-controllers = solar_charge_controllers.connect()
+# MQTT Settings and Setup
+MQTT_BROKER = config.hostname
+MQTT_INVERTER1_TOPIC = "ranch/power/inverter/01/telemetry"
+MQTT_INVERTER2_TOPIC = "ranch/power/inverter/02/telemetry"
+MQTT_INVERTER3_TOPIC = "ranch/power/inverter/03/telemetry"
+MQTT_TOTALS_TOPIC =    "ranch/power/inverter/totals/telemetry"
+MQTT_PORT = 1883
+client = mqtt.Client()
+result = client.connect(MQTT_BROKER, MQTT_PORT, 60)
+print("MQTT connect result: ", result, flush=True)
 
 while True:
-    print(datetime.datetime.now())
+    print("Getting data from inverters...", datetime.datetime.now(), flush=True)
 
-    try:
-        points = []
-        # Get data from inverters.
-        points.extend(mate3s_sunspec.get_points(inverters))
+    # Get data from inverters.
+    messages = mate3s_sunspec.get_mqtt_data(inverters)
 
-        # Get data from solar charge controllers.
-        points.extend(solar_charge_controllers.get_points(*controllers))
-
-        # Write data to database.
-        write_api.write(bucket=bucket, org=org, record=points)
-
-    except Exception as e:
-        print(e)
-        # TODO(kparks) Restart all connections?
+    # Publish data to MQTT.
+    client.publish(MQTT_TOTALS_TOPIC, json.dumps(messages[0]))
+    client.publish(MQTT_INVERTER1_TOPIC, json.dumps(messages[1]))
+    client.publish(MQTT_INVERTER2_TOPIC, json.dumps(messages[2]))
+    client.publish(MQTT_INVERTER3_TOPIC, json.dumps(messages[3]))
+    print("Published data to MQTT.", flush=True)
 
     # Do a sleep loop.
     time.sleep(config.delay_s)
