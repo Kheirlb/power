@@ -1,0 +1,23 @@
+[Unit]
+Description=Chromium Kiosk (Grafana/Node-RED)
+After=graphical-session.target network-online.target
+Wants=network-online.target
+
+[Service]
+Environment=HOME=/home/pi
+Environment=XDG_CONFIG_HOME=/home/pi/.config
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+ExecStart=/usr/bin/chromium-browser \
+  --user-data-dir=/home/pi/.config/chromium-kiosk \
+  --start-fullscreen \
+  --noerrdialogs \
+  --disable-infobars \
+  --disable-session-crashed-bubble \
+  --password-store=basic \
+  http://power.local:1880/dashboard/
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
